@@ -24,15 +24,19 @@ public class Common {
 
 	public void logoffUser() throws InterruptedException {
 		homePageTopMenu.initialiseElements();
-		if(homePageTopMenu.isLogoutDisplayed()) {
-			homePageTopMenu.clickLogout();
-		}else{
+		if(homePageTopMenu.isDisplayed()) {
+			if( homePageTopMenu.isLogoutDisplayed()) {
+				homePageTopMenu.clickLogout();
+			} else {
+				application.navigateBack();
+			}
+		}else {
 			homePage.initialiseElements();
 			homePage.clickTopMenuButton();
 			homePageTopMenu.initialiseElements();
 			if(homePageTopMenu.isLogoutDisplayed()) {
 				homePageTopMenu.clickLogout();
-			}else{
+			}else {
 				application.navigateBack();
 			}
 		}

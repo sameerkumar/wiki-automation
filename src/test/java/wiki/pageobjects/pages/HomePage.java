@@ -31,10 +31,7 @@ public class HomePage extends BasePage {
 	@FindBy(xpath = "//android.widget.TextView[@text='Nearby']")
 	private WebElement nearByNavigationTab;
 
-	public void setSearchText(String searchString) {
-		searchInputBox.sendKeys(searchString);
-	}
-
+	public void clickSearchBox() { searchInputBox.click(); }
 	public void clickTopMenuButton(){
 		topMenuButton.click();
 	}
