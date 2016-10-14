@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import utils.Application;
+import wiki.pageobjects.pages.ArticlePage;
 import wiki.pageobjects.pages.HomePage;
 import wiki.pageobjects.sub.SearchView;
 import wiki.tests.utils.Common;
@@ -33,6 +34,9 @@ public class SearchArticlesTest {
 	@Autowired
 	private SearchView searchView;
 
+	@Autowired
+	private ArticlePage articlePage;
+
 	@Before
 	public void before() throws InterruptedException {
 		application.prepareForTest();
@@ -51,6 +55,12 @@ public class SearchArticlesTest {
 		searchView.initialiseElements();
 		assertThat(searchView.isTitleInResults("Wikipedia")).isTrue();
 		assertThat(searchView.isTitleDescriptionInResults("Free online encyclopedia that anyone can edit")).isTrue();
+
+		searchView.selectArticle("Wikipedia");
+		articlePage.initialiseElements();
+
+		assertThat(articlePage.getArticleHeader().contains("Wikipedia"));
+		assertThat(articlePage.getArticleHeader().contains("Free online encyclopedia that anyone can edit"));
 	}
 
 	@After

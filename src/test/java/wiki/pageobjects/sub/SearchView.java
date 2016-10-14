@@ -66,6 +66,7 @@ public class SearchView extends BasePage{
 		for(WebElement title: matchingTitles) {
 			if(title.getText().trim().equals(titleText)) {
 				title.click();
+				break;
 			}
 		}
 	}
