@@ -1,0 +1,6 @@
+{
+  "devices": [
+    {"port":"4723", "deviceName":"Nexus 5", "platformVersion":"4.4"},
+    {"port":"4724", "deviceName":"Galaxy 5", "platformVersion":"4.1"}
+  ]
+}
