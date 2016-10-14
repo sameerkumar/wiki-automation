@@ -45,21 +45,24 @@ public class SearchArticlesTest {
 
 	@Test
 	public void whenUserEntersValidCredentialsThenLoginIsSuccessful() throws InterruptedException {
-		// Navigate to login page
+		// Enter search text
 		homePage.initialiseElements();
 		homePage.clickSearchBox();
 
 		searchView.initialiseElements();
 		searchView.setSearchText("Wikipedia");
 
+		// Verify search matches
 		searchView.initialiseElements();
 		assertThat(searchView.isTitleInResults("Wikipedia")).isTrue();
 		assertThat(searchView.isTitleDescriptionInResults("Free online encyclopedia that anyone can edit")).isTrue();
 
+		//Select article
 		searchView.selectArticle("Wikipedia");
 		articlePage.initialiseElements();
 		articlePage.waitForLoadComplete();
 
+		// Verify article view
 		assertThat(articlePage.getArticleHeader().contains("Wikipedia"));
 		assertThat(articlePage.getArticleHeader().contains("Free online encyclopedia that anyone can edit"));
 	}

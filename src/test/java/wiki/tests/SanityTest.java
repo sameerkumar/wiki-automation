@@ -15,7 +15,7 @@ import wiki.tests.utils.Common;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
- * Test.
+ *  Sanity Test.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext-test.xml")
