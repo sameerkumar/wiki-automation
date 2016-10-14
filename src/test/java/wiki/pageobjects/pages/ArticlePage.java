@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
- * Created by kumarsam on 14/10/2016.
+ * Article page object.
  */
 @Component
 @ContextConfiguration(locations = "classpath:applicationContext-test.xml")

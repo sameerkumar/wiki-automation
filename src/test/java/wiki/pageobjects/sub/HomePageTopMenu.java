@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import wiki.pageobjects.pages.BasePage;
 
 /**
- * Created by kumarsam on 12/10/2016.
+ * Top bar menu page object.
  */
 @Component
 @ContextConfiguration(locations = "classpath:applicationContext-test.xml")

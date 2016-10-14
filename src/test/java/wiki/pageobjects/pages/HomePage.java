@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 
+/**
+ * Home page object.
+ */
 @Component
 @ContextConfiguration(locations = "classpath:applicationContext-test.xml")
 public class HomePage extends BasePage {

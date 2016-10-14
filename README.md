@@ -11,8 +11,8 @@ Appium test suite using Java + Junit + Spring + Page objects
 * These tests have been developed and tested on Android Emulator. 
 * Will launch Appium server automatically when application test context is loaded.
 * To execute
-    ** connect an android device or run an emulator
-    ** run mvn test
+  * connect an android device or run an emulator
+  * run, mvn test
 
 ## Scenario
 * Login - Being one of the commonest features of the app, this feature is an ideal candidate for automated regression tests.

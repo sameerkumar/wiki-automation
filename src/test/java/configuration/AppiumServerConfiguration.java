@@ -10,6 +10,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import java.io.File;
 
+/**
+ * Appium server configuration.
+ */
 @Configuration
 @PropertySource("classpath:test.properties")
 public class AppiumServerConfiguration {

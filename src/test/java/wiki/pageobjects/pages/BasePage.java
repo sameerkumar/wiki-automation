@@ -14,26 +14,27 @@ import org.springframework.test.context.ContextConfiguration;
 public abstract class BasePage extends LoadableComponent<BasePage> {
 
 	@Autowired
-	public AppiumDriver appiumDriver;
+	private AppiumDriver appiumDriver;
 
-	private int factorialTimeoutBenchmark = 5;
+	private int generalTimeoutFactor = 5;
 
 	protected void load() {}
 
 	protected void isLoaded() {}
 
-	public void initialiseElements() {
+	public final void initialiseElements() {
 		PageFactory.initElements(appiumDriver, this);
 	}
 
 	public abstract boolean isDisplayed();
 
+	public final AppiumDriver getAppiumDriver() { return appiumDriver; }
+
 	/**
-	 Will wait for app pages to load for a maximum factorialTimeoutBenchmark! seconds
-	 @throws InterruptedException
+	 * Will wait for pages to load.
 	 */
-	public void waitTillDisplayed() throws InterruptedException {
-		int timeoutParam = getFactorialTimeoutBenchmark();
+	public final void waitTillDisplayed() throws InterruptedException {
+		int timeoutParam = getGeneralTimeoutFactor();
 		do {
 			initialiseElements();
 			if(isDisplayed()) {break;}
@@ -42,18 +43,18 @@ public abstract class BasePage extends LoadableComponent<BasePage> {
 		}while(timeoutParam > 0);
 	}
 
-	public void setFactorialTimeoutBenchmark(int factorialTimeoutBenchmark) {
-		this.factorialTimeoutBenchmark = factorialTimeoutBenchmark;
+	public final void setGeneralTimeoutFactor(int generalTimeoutFactor) {
+		this.generalTimeoutFactor = generalTimeoutFactor;
 	}
 
-	public int getFactorialTimeoutBenchmark() {
-		return factorialTimeoutBenchmark;
+	public final int getGeneralTimeoutFactor() {
+		return generalTimeoutFactor;
 	}
 
 	@FindBy(id = "page_progress_bar")
 	private WebElement progressBar;
 
-	public boolean isProgressBarDisplayed() {
+	public final boolean isProgressBarDisplayed() {
 		try {
 			return progressBar.isDisplayed();
 		} catch (Exception e ) {
@@ -62,25 +63,24 @@ public abstract class BasePage extends LoadableComponent<BasePage> {
 	}
 
 	/**
-	 * Wait for articles to load
-	 * @throws InterruptedException
+	 * Wait method for pages with progress bar.
 	 */
-	public void waitForLoadComplete() throws InterruptedException {
-		int timeoutParam = getFactorialTimeoutBenchmark();
-
+	public final void waitForLoadComplete() throws InterruptedException {
+		int timeoutParam = getGeneralTimeoutFactor();
 		int progressBarTimeout = 2;
+
+		// Give some time for progress bar to appear.
 		while(!isProgressBarDisplayed() && progressBarTimeout > 0) {
 			initialiseElements();
 			Thread.sleep(1000);
-			progressBarTimeout--;
-		}
-
+			progressBarTimeout--; }
+		// Wait for progress bar to disappear.
 		do {
 			initialiseElements();
 			if(!isProgressBarDisplayed()) {break;}
 			Thread.sleep(timeoutParam * 1000L);
-			timeoutParam--;
-		}while(timeoutParam > 0);
+			timeoutParam--;	}
+		while(timeoutParam > 0);
 	}
 
 }

@@ -9,7 +9,7 @@ import wiki.pageobjects.pages.BasePage;
 import java.util.List;
 
 /**
- * Created by kumarsam on 12/10/2016.
+ * Search view page object.
  */
 @Component
 @ContextConfiguration(locations = "classpath:applicationContext-test.xml")

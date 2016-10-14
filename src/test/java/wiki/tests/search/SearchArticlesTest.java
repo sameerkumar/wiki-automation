@@ -44,7 +44,7 @@ public class SearchArticlesTest {
 	}
 
 	@Test
-	public void whenUserEntersValidCredentialsThenLoginIsSuccessful() throws InterruptedException {
+	public void aUserCanSearchAndViewAnArticle() throws InterruptedException {
 		// Enter search text
 		homePage.initialiseElements();
 		homePage.clickSearchBox();

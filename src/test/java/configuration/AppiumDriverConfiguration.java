@@ -17,7 +17,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Test Configurations.
+ * Android Driver Configurations.
  */
 @Configuration
 @PropertySource("classpath:test.properties")
