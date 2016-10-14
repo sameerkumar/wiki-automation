@@ -15,5 +15,5 @@ Appium test suite using Java + Junit + Spring + Page objects
     ** run mvn test
 
 ## Scenario
-* Login - Being one of the commonest features of the app.
-* Search - Another most used feature within the app.
+* Login - Being one of the commonest features of the app, this feature is an ideal candidate for automated regression tests.
+* Search - Another most used feature within the app suitable for automated regression tests.
