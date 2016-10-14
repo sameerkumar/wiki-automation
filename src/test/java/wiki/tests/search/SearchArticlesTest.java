@@ -58,6 +58,7 @@ public class SearchArticlesTest {
 
 		searchView.selectArticle("Wikipedia");
 		articlePage.initialiseElements();
+		articlePage.waitForLoadComplete();
 
 		assertThat(articlePage.getArticleHeader().contains("Wikipedia"));
 		assertThat(articlePage.getArticleHeader().contains("Free online encyclopedia that anyone can edit"));

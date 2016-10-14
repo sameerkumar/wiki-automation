@@ -1,6 +1,8 @@
 package wiki.pageobjects.pages;
 
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,7 @@ public abstract class BasePage extends LoadableComponent<BasePage> {
 	public abstract boolean isDisplayed();
 
 	/**
-	 Will wait for maximum factorialTimeoutBenchmark!	seconds
+	 Will wait for app pages to load for a maximum factorialTimeoutBenchmark! seconds
 	 @throws InterruptedException
 	 */
 	public void waitTillDisplayed() throws InterruptedException {
@@ -46,6 +48,39 @@ public abstract class BasePage extends LoadableComponent<BasePage> {
 
 	public int getFactorialTimeoutBenchmark() {
 		return factorialTimeoutBenchmark;
+	}
+
+	@FindBy(id = "page_progress_bar")
+	private WebElement progressBar;
+
+	public boolean isProgressBarDisplayed() {
+		try {
+			return progressBar.isDisplayed();
+		} catch (Exception e ) {
+			return false;
+		}
+	}
+
+	/**
+	 * Wait for articles to load
+	 * @throws InterruptedException
+	 */
+	public void waitForLoadComplete() throws InterruptedException {
+		int timeoutParam = getFactorialTimeoutBenchmark();
+
+		int progressBarTimeout = 2;
+		while(!isProgressBarDisplayed() && progressBarTimeout > 0) {
+			initialiseElements();
+			Thread.sleep(1000);
+			progressBarTimeout--;
+		}
+
+		do {
+			initialiseElements();
+			if(!isProgressBarDisplayed()) {break;}
+			Thread.sleep(timeoutParam * 1000L);
+			timeoutParam--;
+		}while(timeoutParam > 0);
 	}
 
 }
