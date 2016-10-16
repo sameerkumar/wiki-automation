@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,14 +18,8 @@ import java.net.URL;
  * Android Driver Configurations.
  */
 @Configuration
-@PropertySource("classpath:test.properties")
 @DependsOn("appiumServerConfiguration")
 public class AppiumDriverConfiguration {
-
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
 
 	@Autowired
 	private AppiumDriverLocalService appiumDriverLocalService;
@@ -46,7 +38,6 @@ public class AppiumDriverConfiguration {
 
 	private String getAppiumServiceURL() {
 		return appiumDriverLocalService.getUrl().toString();
-		//return "http://" + host + ":" + port + "/wd/hub";
 	}
 
 	@Bean
@@ -56,7 +47,7 @@ public class AppiumDriverConfiguration {
 		capabilities.setCapability("app", appDir.concat(appName));
 		capabilities.setCapability("noReset", "true");
 		capabilities.setCapability("fullReset", "false");
-		capabilities.setCapability("deviceName", "Nexus-Emulator");
+		capabilities.setCapability("deviceName", "Emulator");
 		return new AndroidDriver(new URL(getAppiumServiceURL()), capabilities);
 	}
 

@@ -23,7 +23,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class SuccessfulLoginTest {
 
 	@Autowired
-	Application application;
+	private Application application;
 
 	@Autowired
 	private HomePage homePage;
@@ -40,6 +40,7 @@ public class SuccessfulLoginTest {
 	@Before
 	public void before() throws InterruptedException {
 		application.prepareForTest();
+		common.waitForAppToLaunch();
 		common.logoffUser();
 	}
 
@@ -53,8 +54,8 @@ public class SuccessfulLoginTest {
 
 		// Enter credentials
 		loginPage.waitTillDisplayed();
-		loginPage.setUsername("madtester");
-		loginPage.setPasswordInputBox("madtester123");
+		loginPage.setUsername("madtester"); // Test credentials, no personal data
+		loginPage.setPasswordInputBox("madtester123"); // Test credentials, no personal data
 		loginPage.clickLoginButton();
 
 		// Verify
@@ -66,6 +67,8 @@ public class SuccessfulLoginTest {
 		homePageTopMenu.initialiseElements();
 		assertThat(homePageTopMenu.isLogoutDisplayed()).isTrue();
 		assertThat(homePageTopMenu.getUsername()).isEqualToIgnoringCase("madtester");
+
+		application.navigateBack();
 	}
 
 	@After

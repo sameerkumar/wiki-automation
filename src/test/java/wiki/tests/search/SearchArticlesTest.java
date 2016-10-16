@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import utils.Application;
+import utils.Message;
 import wiki.pageobjects.pages.ArticlePage;
 import wiki.pageobjects.pages.HomePage;
-import wiki.pageobjects.sub.SearchView;
+import wiki.pageobjects.sub.ArticleSearchView;
 import wiki.tests.utils.Common;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -23,7 +24,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class SearchArticlesTest {
 
 	@Autowired
-	Application application;
+	private Application application;
 
 	@Autowired
 	private HomePage homePage;
@@ -32,7 +33,7 @@ public class SearchArticlesTest {
 	private Common common;
 
 	@Autowired
-	private SearchView searchView;
+	private ArticleSearchView searchView;
 
 	@Autowired
 	private ArticlePage articlePage;
@@ -40,7 +41,7 @@ public class SearchArticlesTest {
 	@Before
 	public void before() throws InterruptedException {
 		application.prepareForTest();
-		common.logoffUser();
+		common.waitForAppToLaunch();
 	}
 
 	@Test
@@ -54,17 +55,17 @@ public class SearchArticlesTest {
 
 		// Verify search matches
 		searchView.initialiseElements();
-		assertThat(searchView.isTitleInResults("Wikipedia")).isTrue();
-		assertThat(searchView.isTitleDescriptionInResults("Free online encyclopedia that anyone can edit")).isTrue();
+		assertThat(searchView.isTitleInResults(Message.getMessage("wikipedia.article.header"))).isTrue();
+		assertThat(searchView.isTitleDescriptionInResults(Message.getMessage("wikipedia.article.description"))).isTrue();
 
 		//Select article
-		searchView.selectArticle("Wikipedia");
-		articlePage.initialiseElements();
-		articlePage.waitForLoadComplete();
+		searchView.selectArticle(Message.getMessage("wikipedia.article.header"));
 
 		// Verify article view
-		assertThat(articlePage.getArticleHeader().contains("Wikipedia"));
-		assertThat(articlePage.getArticleHeader().contains("Free online encyclopedia that anyone can edit"));
+		articlePage.waitForLoadComplete();
+		articlePage.initialiseElements();
+		assertThat(articlePage.getArticleHeader().contains(Message.getMessage("wikipedia.article.header")));
+		assertThat(articlePage.getArticleHeader().contains(Message.getMessage("wikipedia.article.description")));
 	}
 
 	@After

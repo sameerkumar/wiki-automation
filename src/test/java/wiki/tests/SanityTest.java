@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import utils.Application;
@@ -22,6 +23,9 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class SanityTest {
 
 	@Autowired
+	ApplicationContext context;
+
+	@Autowired
 	Application application;
 
 	@Autowired
@@ -36,7 +40,6 @@ public class SanityTest {
 	@Before
 	public void before() throws InterruptedException {
 		application.prepareForTest();
-		common.logoffUser();
 	}
 
 	@Test
@@ -47,6 +50,8 @@ public class SanityTest {
 		homePage.clickTopMenuButton();
 	 	homePageTopMenu.initialiseElements();
 		assertThat(homePageTopMenu.isDisplayed()).isTrue();
+
+		application.navigateBack();
 	}
 
 	@After

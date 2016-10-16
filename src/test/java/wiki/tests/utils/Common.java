@@ -6,12 +6,14 @@ import utils.Application;
 import wiki.pageobjects.pages.HomePage;
 import wiki.pageobjects.pages.LoginPage;
 import wiki.pageobjects.sub.HomePageTopMenu;
+import wiki.pageobjects.sub.LanguageSearchView;
+import wiki.pageobjects.sub.SettingsView;
 
 @Component
 public class Common {
 
 	@Autowired
-	Application application;
+	private Application application;
 
 	@Autowired
 	private HomePage homePage;
@@ -21,6 +23,12 @@ public class Common {
 
 	@Autowired
 	private LoginPage loginPage;
+
+	@Autowired
+	private SettingsView settingsView;
+
+	@Autowired
+	private LanguageSearchView languageSearchView;
 
 	public void logoffUser() throws InterruptedException {
 		homePageTopMenu.initialiseElements();
@@ -41,4 +49,29 @@ public class Common {
 			}
 		}
 	}
+
+	public void updateLanguage(String language) throws InterruptedException {
+		homePage.initialiseElements();
+		homePage.clickTopMenuButton();
+
+		homePageTopMenu.initialiseElements();
+		homePageTopMenu.clickSettings();
+
+		settingsView.initialiseElements();
+		settingsView.waitForLoadComplete();
+
+		settingsView.selectOption("Wikipedia language");
+
+		languageSearchView.initialiseElements();
+		languageSearchView.setLanguageSearch(language);
+		languageSearchView.initialiseElements();
+		languageSearchView.selectLanguage(language);
+
+		application.navigateBack();
+	}
+
+	public void waitForAppToLaunch() throws InterruptedException {
+		homePage.waitTillDisplayed();
+	}
+
 }

@@ -54,4 +54,8 @@ public class Application {
 
 	public void cleanUp() {
 	}
+
+	public void hideKeyboard() {
+		appiumDriver.hideKeyboard();
+	}
 }

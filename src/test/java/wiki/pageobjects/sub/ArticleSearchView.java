@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Component
 @ContextConfiguration(locations = "classpath:applicationContext-test.xml")
-public class SearchView extends BasePage{
+public class ArticleSearchView extends BasePage{
 
 	@FindBy(id = "search_src_text")
 	private WebElement searchInputBox;

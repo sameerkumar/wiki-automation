@@ -13,4 +13,6 @@
     <context:component-scan base-package="wiki/tests/utils" />
     <bean class="configuration.AppiumDriverConfiguration" />
 
+    <context:property-placeholder location="classpath:test.properties"/>
+
 </beans>

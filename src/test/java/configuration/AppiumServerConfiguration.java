@@ -5,8 +5,6 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import java.io.File;
 
@@ -14,7 +12,6 @@ import java.io.File;
  * Appium server configuration.
  */
 @Configuration
-@PropertySource("classpath:test.properties")
 public class AppiumServerConfiguration {
 
 	@Value("${appium.install.location}")
@@ -34,11 +31,6 @@ public class AppiumServerConfiguration {
 
 	@Value("${appium.port}")
 	private int port;
-
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
 
 	@Bean
 	public AppiumDriverLocalService appiumDriverLocalService() {
