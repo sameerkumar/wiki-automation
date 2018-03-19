@@ -1,4 +1,6 @@
-# wiki-automation
+## Am updating packages and tests to be compatible to the latest version of the app, stay tuned
+
+# wiki-automation (valid for 2016 App)
 Appium test suite using Java + Junit + Spring + Page objects
 
 ## Requirements
