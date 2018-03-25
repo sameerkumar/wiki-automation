@@ -1,9 +1,10 @@
 package wiki.pageobjects.pages;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
+
+import io.appium.java_client.MobileElement;
 
 /**
  * Article page object.
@@ -13,10 +14,14 @@ import org.springframework.test.context.ContextConfiguration;
 public class ArticlePage extends BasePage{
 
 	@FindBy(id = "view_article_header_container")
-	private WebElement headerContainer;
+	private MobileElement headerContainer;
 
-	@FindBy(id = "view_article_header_text")
-	private WebElement headerText;
+	@FindBy(id = "org.wikipedia.alpha:id/view_page_title_text")
+	private MobileElement headerText;
+	
+	@FindBy(id = "org.wikipedia.alpha:id/view_page_subtitle_text")
+	private MobileElement subHeaderText;
+	
 
 	@Override
 	public boolean isDisplayed() {
@@ -29,6 +34,10 @@ public class ArticlePage extends BasePage{
 
 	public String getArticleHeader() {
 		return headerText.getText();
+	}
+	
+	public String getArticleSubHeader() {
+		return subHeaderText.getText();
 	}
 }
 

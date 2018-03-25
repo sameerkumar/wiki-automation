@@ -1,10 +1,11 @@
 package wiki.pageobjects.pages;
 
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
+
+import io.appium.java_client.MobileElement;
 
 /**
  * Home page object.
@@ -14,25 +15,25 @@ import org.springframework.test.context.ContextConfiguration;
 public class HomePage extends BasePage {
 
 	@FindBy(id = "single_fragment_toolbar_wordmark")
-	private WebElement logo;
+	private MobileElement logo;
 
 	@FindBy(id = "menu_overflow_button")
-	private WebElement topMenuButton;
+	private MobileElement topMenuButton;
 
 	@FindBy(id = "search_container")
-	private WebElement searchInputBox;
+	private MobileElement searchInputBox;
 
 	@FindBy(xpath = "//android.widget.TextView[@text='Explore']")
-	private WebElement exploreNavigationTab;
+	private MobileElement exploreNavigationTab;
 
 	@FindBy(xpath = "//android.widget.TextView[@text='My lists']")
-	private WebElement myListsNavigationTab;
+	private MobileElement myListsNavigationTab;
 
 	@FindBy(xpath = "//android.widget.TextView[@text='History']")
-	private WebElement historyNavigationTab;
+	private MobileElement historyNavigationTab;
 
 	@FindBy(xpath = "//android.widget.TextView[@text='Nearby']")
-	private WebElement nearByNavigationTab;
+	private MobileElement nearByNavigationTab;
 
 	public void clickSearchBox() { searchInputBox.click(); }
 	public void clickTopMenuButton(){

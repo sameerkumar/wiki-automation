@@ -1,9 +1,10 @@
 package wiki.pageobjects.sub;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
+
+import io.appium.java_client.MobileElement;
 import wiki.pageobjects.pages.BasePage;
 
 import java.util.List;
@@ -16,19 +17,19 @@ import java.util.List;
 public class ArticleSearchView extends BasePage{
 
 	@FindBy(id = "search_src_text")
-	private WebElement searchInputBox;
+	private MobileElement searchInputBox;
 
 	@FindBy( id = "search_close_btn")
-	private WebElement searchCloseButton;
+	private MobileElement searchCloseButton;
 
 	@FindBy( id = "search_lang_button")
-	private WebElement searchLanguageButton;
+	private MobileElement searchLanguageButton;
 
 	@FindBy(id = "page_list_item_title")
-	private List<WebElement> matchingTitles;
+	private List<MobileElement> matchingTitles;
 
 	@FindBy(id = "page_list_item_description")
-	private List<WebElement> matchingTitleDescriptions;
+	private List<MobileElement> matchingTitleDescriptions;
 
 	@Override
 	public boolean isDisplayed() {
@@ -45,7 +46,7 @@ public class ArticleSearchView extends BasePage{
 	}
 
 	public boolean isTitleInResults(String titleText) {
-		for(WebElement title: matchingTitles) {
+		for(MobileElement title: matchingTitles) {
 				if(title.getText().trim().equals(titleText)) {
 					return true;
 				}
@@ -54,7 +55,7 @@ public class ArticleSearchView extends BasePage{
 	}
 
 	public boolean isTitleDescriptionInResults(String description) {
-		for(WebElement titleDescription: matchingTitleDescriptions) {
+		for(MobileElement titleDescription: matchingTitleDescriptions) {
 			if(titleDescription.getText().trim().equals(description)) {
 				return true;
 			}
@@ -63,7 +64,7 @@ public class ArticleSearchView extends BasePage{
 	}
 
 	public void selectArticle(String titleText) {
-		for(WebElement title: matchingTitles) {
+		for(MobileElement title: matchingTitles) {
 			if(title.getText().trim().equals(titleText)) {
 				title.click();
 				break;

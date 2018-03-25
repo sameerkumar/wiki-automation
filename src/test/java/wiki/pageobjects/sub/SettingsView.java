@@ -1,9 +1,10 @@
 package wiki.pageobjects.sub;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
+
+import io.appium.java_client.MobileElement;
 import wiki.pageobjects.pages.BasePage;
 
 import java.util.List;
@@ -16,10 +17,13 @@ import java.util.List;
 public class SettingsView extends BasePage{
 
 	@FindBy(id="action_bar_container")
-	private WebElement headerBar;
+	private MobileElement headerBar;
 
 	@FindBy(id="title")
-	private List<WebElement> settingOptions;
+	private List<MobileElement> settingOptions;
+	
+	@FindBy(id="summary")
+	private List<MobileElement> summaries;
 
 	@Override
 	public boolean isDisplayed() {
@@ -35,13 +39,22 @@ public class SettingsView extends BasePage{
 	}
 
 	public void selectOption(String settingOption) {
-		for(WebElement option: settingOptions) {
+		for(MobileElement option: settingOptions) {
 			if(option.getText().trim().equals(settingOption)) {
 				option.click();
 				break;
 			}
 		}
 	}
-
-
+	
+	public String GetSummaryForOption(String settingOption) {
+		int index=0;
+		for(MobileElement option: settingOptions) {			
+			if(option.getText().trim().equals(settingOption)) {
+				return summaries.get(index).getText().trim();
+			}
+			index++;
+		}
+		return "";
+	}
 }

@@ -1,10 +1,11 @@
 package wiki.pageobjects.sub;
 
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
+
+import io.appium.java_client.MobileElement;
 import wiki.pageobjects.pages.BasePage;
 
 /**
@@ -15,16 +16,16 @@ import wiki.pageobjects.pages.BasePage;
 public class HomePageTopMenu extends BasePage{
 
 	@FindBy(id = "explore_overflow_account_name")
-	private WebElement user;
+	private MobileElement user;
 
 	@FindBy(id = "explore_overflow_settings")
-	private WebElement settings;
+	private MobileElement settings;
 
 	@FindBy(id = "explore_overflow_donate")
-	private WebElement supportWikipedia;
+	private MobileElement supportWikipedia;
 
 	@FindBy(id = "explore_overflow_log_out")
-	private WebElement logout;
+	private MobileElement logout;
 
 	public void clickUser() {
 		user.click();

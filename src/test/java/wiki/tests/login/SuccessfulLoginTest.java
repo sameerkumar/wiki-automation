@@ -5,11 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import utils.Application;
+import utils.ApplicationUtil;
 import wiki.pageobjects.pages.HomePage;
 import wiki.pageobjects.pages.LoginPage;
+import wiki.pageobjects.sub.AlertPage;
 import wiki.pageobjects.sub.HomePageTopMenu;
 import wiki.tests.utils.Common;
 
@@ -20,10 +22,11 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext-test.xml")
+@DirtiesContext
 public class SuccessfulLoginTest {
 
 	@Autowired
-	private Application application;
+	private ApplicationUtil application;
 
 	@Autowired
 	private HomePage homePage;
@@ -33,6 +36,9 @@ public class SuccessfulLoginTest {
 
 	@Autowired
 	private LoginPage loginPage;
+	
+	@Autowired
+	private AlertPage alertPage;
 
 	@Autowired
 	private Common common;
@@ -53,11 +59,18 @@ public class SuccessfulLoginTest {
 		homePageTopMenu.clickUser();
 
 		// Enter credentials
-		loginPage.waitTillDisplayed();
-		loginPage.setUsername("madtester"); // Test credentials, no personal data
+		loginPage.waitTillDisplayed();		
 		loginPage.setPasswordInputBox("madtester123"); // Test credentials, no personal data
+		loginPage.setUsername("madtester"); // Test credentials, no personal data
 		loginPage.clickLoginButton();
 
+		alertPage.waitTillDisplayed();		
+		if(alertPage.isDisplayed()) {
+			alertPage.clickCheckBox();
+			alertPage.clickNo();
+		}
+			
+		
 		// Verify
 		homePage.waitTillDisplayed();
 		assertThat(homePage.isDisplayed()).isTrue();

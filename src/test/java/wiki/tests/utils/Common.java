@@ -2,7 +2,7 @@ package wiki.tests.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import utils.Application;
+import utils.ApplicationUtil;
 import wiki.pageobjects.pages.HomePage;
 import wiki.pageobjects.pages.LoginPage;
 import wiki.pageobjects.sub.HomePageTopMenu;
@@ -13,7 +13,7 @@ import wiki.pageobjects.sub.SettingsView;
 public class Common {
 
 	@Autowired
-	private Application application;
+	private ApplicationUtil application;
 
 	@Autowired
 	private HomePage homePage;
@@ -60,12 +60,14 @@ public class Common {
 		settingsView.initialiseElements();
 		settingsView.waitForLoadComplete();
 
-		settingsView.selectOption("Wikipedia language");
-
-		languageSearchView.initialiseElements();
-		languageSearchView.setLanguageSearch(language);
-		languageSearchView.initialiseElements();
-		languageSearchView.selectLanguage(language);
+		if(!settingsView.GetSummaryForOption("Wikipedia language").equals(language)) {
+			
+			settingsView.selectOption("Wikipedia language");	
+			languageSearchView.initialiseElements();
+			languageSearchView.setLanguageSearch(language);
+			languageSearchView.initialiseElements();
+			languageSearchView.selectLanguage(language);
+		}
 
 		application.navigateBack();
 	}

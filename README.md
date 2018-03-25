@@ -1,6 +1,6 @@
-## Am updating packages and tests to be compatible to the latest version of the app, stay tuned
+## Tests valid for current Wikipedia app built from master at commit 2124df9b7c85cb535eaf40c8061f25736567c74a
 
-# wiki-automation (valid for 2016 App)
+# wiki-automation
 Appium test suite using Java + Junit + Spring + Page objects
 
 ## Requirements
@@ -15,7 +15,7 @@ Appium test suite using Java + Junit + Spring + Page objects
 
 ## Test
 * Set, test.properties
-* These tests have been developed and tested on Android Emulator.
+* These tests have been developed and tested on the Moto G (Android 5) which I gifted my Mrs and was duely gifted back couple of years ago.
 * Will launch Appium server automatically when application test context is loaded.
 * To execute
   * connect an android device or run an emulator

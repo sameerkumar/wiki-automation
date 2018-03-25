@@ -5,9 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import utils.Application;
+import utils.ApplicationUtil;
 import utils.Message;
 import wiki.pageobjects.pages.ArticlePage;
 import wiki.pageobjects.pages.HomePage;
@@ -21,10 +22,11 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext-test.xml")
+@DirtiesContext
 public class SearchArticlesTest {
 
 	@Autowired
-	private Application application;
+	private ApplicationUtil application;
 
 	@Autowired
 	private HomePage homePage;
@@ -65,7 +67,7 @@ public class SearchArticlesTest {
 		articlePage.waitForLoadComplete();
 		articlePage.initialiseElements();
 		assertThat(articlePage.getArticleHeader().contains(Message.getMessage("wikipedia.article.header")));
-		assertThat(articlePage.getArticleHeader().contains(Message.getMessage("wikipedia.article.description")));
+		assertThat(articlePage.getArticleSubHeader().contains(Message.getMessage("wikipedia.article.description")));
 	}
 
 	@After

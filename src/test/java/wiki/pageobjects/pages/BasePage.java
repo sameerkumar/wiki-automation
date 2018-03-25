@@ -1,7 +1,9 @@
 package wiki.pageobjects.pages;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.WebElement;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
@@ -23,7 +25,7 @@ public abstract class BasePage extends LoadableComponent<BasePage> {
 	protected void isLoaded() {}
 
 	public final void initialiseElements() {
-		PageFactory.initElements(appiumDriver, this);
+		PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), this);
 	}
 
 	public abstract boolean isDisplayed();
@@ -37,10 +39,13 @@ public abstract class BasePage extends LoadableComponent<BasePage> {
 		int timeoutParam = getGeneralTimeoutFactor();
 		do {
 			initialiseElements();
-			if(isDisplayed()) {break;}
+			try {
+				if(isDisplayed()) {break;}
+			}catch(Exception e) {}
 			Thread.sleep(timeoutParam * 1000L);
 			timeoutParam--;
 		}while(timeoutParam > 0);
+		initialiseElements();
 	}
 
 	public final void setGeneralTimeoutFactor(int generalTimeoutFactor) {
@@ -52,7 +57,7 @@ public abstract class BasePage extends LoadableComponent<BasePage> {
 	}
 
 	@FindBy(id = "page_progress_bar")
-	private WebElement progressBar;
+	private MobileElement progressBar;
 
 	public final boolean isProgressBarDisplayed() {
 		try {

@@ -6,9 +6,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContextManager;
-import utils.Application;
+import utils.ApplicationUtil;
 import utils.Internationalisation;
 import utils.Message;
 import wiki.pageobjects.pages.ArticlePage;
@@ -27,10 +28,11 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  */
 @RunWith(Parameterized.class)
 @ContextConfiguration(locations = "classpath:applicationContext-test.xml")
+@DirtiesContext
 public class ArticlesLanguageTest {
 
 	@Autowired
-	private Application application;
+	private ApplicationUtil application;
 
 	@Autowired
 	private HomePage homePage;
@@ -58,6 +60,7 @@ public class ArticlesLanguageTest {
 		this.testContextManager.prepareTestInstance(this);
 		application.prepareForTest();
 		common.waitForAppToLaunch();
+		common.logoffUser();
 	}
 
 	@Parameterized.Parameters
@@ -69,7 +72,7 @@ public class ArticlesLanguageTest {
 	public void articlesAreDisplayedInTheLanguageSpecifiedInTheApp() throws InterruptedException {
 		// Update language
 		common.updateLanguage(locale.getDisplayLanguage());
-
+		
 		// Enter search text
 		homePage.initialiseElements();
 		homePage.clickSearchBox();
@@ -95,8 +98,7 @@ public class ArticlesLanguageTest {
 
 	@After
 	public void after() throws InterruptedException {
-		// revert to default
-		common.updateLanguage("English");
+		// revert to default		
 		application.cleanUp();
 	}
 }

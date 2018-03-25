@@ -36,13 +36,11 @@ public class AppiumServerConfiguration {
 	public AppiumDriverLocalService appiumDriverLocalService() {
 		if(appiumUseAnyFreePort) {
 			return AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-					.usingAnyFreePort()
-					.usingDriverExecutable(new File(appiumInstallLocation + appiumNodeExecutable))
+					.usingAnyFreePort()					
 					.withAppiumJS(new File(appiumInstallLocation + appiumMainJS)));
 		}
 		return AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-				.usingPort(port)
-				.usingDriverExecutable(new File(appiumInstallLocation + appiumNodeExecutable))
-				.withAppiumJS(new File(appiumInstallLocation + appiumMainJS)));
+				.usingPort(port)				
+				.withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js")));
 	}
 }

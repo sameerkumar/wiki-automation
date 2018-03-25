@@ -1,32 +1,34 @@
 package wiki.pageobjects.pages;
 
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
+
+import io.appium.java_client.MobileElement;
 
 @Component
 @ContextConfiguration(locations = "classpath:applicationContext-test.xml")
 public class LoginPage extends BasePage {
 
 	@FindBy(id = "login_username_text")
-	private WebElement usernameInputBox;
+	private MobileElement usernameInputBox;
 
-	@FindBy(id = "password_edit_text_input")
-	private WebElement passwordInputBox;
+	@FindBy(id = "login_password_input")
+	private MobileElement passwordInputBox;
 
 	@FindBy(id = "login_button")
-	private WebElement loginButton;
+	private MobileElement loginButton;
 
 	@FindBy(id = "login_create_account_link")
-	private WebElement createAccountLink;
+	private MobileElement createAccountLink;
 
 	public void setUsername(String username) {
-		usernameInputBox.sendKeys(username);
+		usernameInputBox.findElement(By.className("android.widget.EditText")).sendKeys(username);
 	}
 
 	public void setPasswordInputBox(String password) {
-		passwordInputBox.sendKeys(password);
+		passwordInputBox.findElement(By.className("android.widget.EditText")).sendKeys(password);
 	}
 
 	public void clickLoginButton() {
